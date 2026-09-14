@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拙政园 · 猫导游</title>
+<meta name="description" content="跟着园里的橘猫，读拙政园的来历，在手绘地图上逛八处景点。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="catMini" viewBox="0 0 100 80">
+    <path class="cat-tail" d="M70 48 Q92 42 88 20" fill="none" stroke="#e8964a" stroke-width="8" stroke-linecap="round"/>
+    <path d="M30 50 Q28 80 60 80 Q90 78 86 52 Q80 32 54 30 Q32 30 30 50Z" fill="#e8964a"/>
+    <circle cx="36" cy="34" r="20" fill="#e8964a"/>
+    <path d="M22 20 L20 4 L34 14Z" fill="#e8964a"/>
+    <path d="M50 20 L54 4 L40 13Z" fill="#e8964a"/>
+    <circle cx="30" cy="33" r="2.4" fill="#fff"/>
+    <circle cx="43" cy="33" r="2.4" fill="#fff"/>
+  </symbol>
+</defs></svg>
+
+<nav class="topbar" aria-label="章节">
+  <a class="brand" href="#top">拙政园<span>猫导游</span></a>
+  <div class="topbar-links">
+    <a href="#about">园子档案</a>
+    <a href="#origin">拙政由来</a>
+    <a href="#timeline">历任主人</a>
+    <a href="#parts">三园</a>
+    <a href="#map">地图探索</a>
+    <a href="#owners">园猫</a>
+  </div>
+</nav>
+
+<!-- 1 开屏 -->
+<header class="hero" id="top">
+  <div class="hero-text">
+    <p class="eyebrow">苏州 · 东北街 · 始建于明正德四年</p>
+    <h1>拙政园：<br>一个聪明人<br>选择不玩的地方</h1>
+    <p class="hero-lead">1509 年，王献臣辞官回乡，在一片积水废墟上造了这座园子。五百年后，园里住着一只橘猫，今天由它带路。</p>
+    <div class="hero-say">
+      <p id="heroSay" aria-live="polite"></p>
+    </div>
+    <a class="btn" href="#about">跟本喵进园 <span aria-hidden="true">↓</span></a>
+  </div>
+  <div class="hero-visual">
+    <div class="moon">
+      <img src="img/lg/hefeng-simian-ting-1.jpg" alt="拙政园中园的荷池与亭子">
+    </div>
+    <svg class="hero-cat" viewBox="0 0 200 160" aria-hidden="true">
+      <path class="cat-tail" d="M150 82 Q188 70 182 34" fill="none" stroke="#e8964a" stroke-width="12" stroke-linecap="round"/>
+      <path d="M60 96 Q56 148 108 150 Q160 150 158 100 Q150 66 112 62 Q74 60 60 96Z" fill="#e8964a" stroke="#222" stroke-width="3"/>
+      <circle cx="66" cy="56" r="34" fill="#e8964a" stroke="#222" stroke-width="3"/>
+      <path d="M42 34 L38 6 L62 22Z" fill="#e8964a" stroke="#222" stroke-width="3"/>
+      <path d="M90 34 L94 6 L70 22Z" fill="#e8964a" stroke="#222" stroke-width="3"/>
+      <g class="cat-eyes"><circle cx="54" cy="54" r="3.2" fill="#222"/><circle cx="76" cy="54" r="3.2" fill="#222"/></g>
+      <path d="M62 62 L66 66 L70 62" fill="none" stroke="#b3402a" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M52 88 Q66 96 80 88" fill="none" stroke="#b3402a" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+<!-- 2 园子档案 -->
+<section id="about" data-cat="about">
+  <div class="wrap">
+    <h2 class="reveal">拙政园是个什么园</h2>
+    <div class="about-grid">
+      <div class="essay reveal">
+        <p>拙政园位于苏州东北街，始建于明正德四年（1509 年），是苏州现存最大的古典园林，占地约 78 亩，素有“中国园林之母”之称。</p>
+        <p>全园以水取胜，水面约占三分之一。房屋临水而建，回廊蜿蜒相连，人走在园中，像走在一幅展开的山水长卷里。粉墙黛瓦、色调素雅，追求“虽由人作，宛自天开”的自然之趣。</p>
+        <p>全园分东、中、西三部分：东部疏朗开阔，中部是全园精华，西部回廊精巧。1997 年列入《世界遗产名录》。</p>
+      </div>
+      <figure class="about-photo reveal">
+        <img src="img/lg/entrance-rockery-1.jpg" alt="拙政园入口粉墙与松石" loading="lazy">
+        <figcaption>园门内的松石与粉墙</figcaption>
+      </figure>
+    </div>
+    <dl class="facts reveal">
+      <div><dt>1509</dt><dd>始建</dd></div>
+      <div><dt>约 78 亩</dt><dd>苏州现存最大古典园林</dd></div>
+      <div><dt>1 / 3</dt><dd>水面占全园</dd></div>
+      <div><dt>1997</dt><dd>列入世界遗产</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="origin" class="origin" data-cat="origin">
+  <div class="wrap origin-grid">
+    <blockquote class="origin-quote reveal">
+      <p>此亦拙者之为政也</p>
+      <cite>潘岳《闲居赋》</cite>
+    </blockquote>
+    <div class="origin-body reveal">
+      <h2>拙者，为政也</h2>
+      <p class="excerpt">“灌园鬻蔬，供朝夕之膳……此亦拙者之为政也。”</p>
+      <p>王献臣是明朝的监察御史，两次得罪权贵、两遭贬谪。回到苏州后，他买下城东北一片积水洼地，顺应地势挖池堆山、种树建堂，把“不适合盖房子”的缺陷，做成了“以水为中心”的园林。</p>
+      <p>“拙者之为政”——我这个笨人，浇浇菜园子，就是我的政事了。表面自嘲，其实是不服：<em>不是我不会做官，是那个官场，我不屑于玩。</em></p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline" data-cat="timeline">
+  <div class="wrap">
+    <h2 class="reveal">五百年，三十余任主人</h2>
+    <ol class="tl">
+      <li class="reveal"><span class="y">1509</span><p>王献臣弃官回乡，在城东北积水洼地始建拙政园。</p></li>
+      <li class="reveal"><span class="y">1533</span><p>文徵明作《王氏拙政园记》，并绘园中三十一景图。</p></li>
+      <li class="reveal"><span class="y">1631</span><p>东部荒地归侍郎王心一，营造“归田园居”，兰雪堂即其主厅。</p></li>
+      <li class="reveal"><span class="y">1860</span><p>太平军攻占苏州，忠王李秀成以此园一部分建忠王府。</p></li>
+      <li class="reveal"><span class="y">1877</span><p>富商张履谦购得西部，营“补园”，建卅六鸳鸯馆。</p></li>
+      <li class="reveal"><span class="y">1997</span><p>列入《世界遗产名录》。</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="parts" class="parts" data-cat="parts">
+  <div class="wrap">
+    <h2 class="reveal">东园 · 中园 · 西园</h2>
+    <div class="cards3">
+      <article class="pc reveal">
+        <img src="img/sm/zhuiyun-peak-1.jpg" alt="东园缀云峰" loading="lazy">
+        <div class="pc-bd">
+          <h3>东园 · 归田园居</h3>
+          <p>大草坪、黑松林，疏朗开阔。兰雪堂、缀云峰、天泉亭皆在此。</p>
+        </div>
+      </article>
+      <article class="pc reveal">
+        <img src="img/sm/yuanxiangtang-1.jpg" alt="中园荷池" loading="lazy">
+        <div class="pc-bd">
+          <h3>中园 · 园之精华</h3>
+          <p>水面约占三分之一，远香堂环水而立，小飞虹廊桥跨水。</p>
+        </div>
+      </article>
+      <article class="pc reveal">
+        <img src="img/sm/saliu-yuanyang-guan-1.jpg" alt="西园卅六鸳鸯馆" loading="lazy">
+        <div class="pc-bd">
+          <h3>西园 · 补园</h3>
+          <p>晚清遗韵。卅六鸳鸯馆一厅两用，与谁同坐轩小而精——“与谁同坐？明月清风我。”</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3 地图探索 -->
+<section id="map" class="explore" data-cat="map">
+  <div class="wrap wide">
+    <div class="explore-head reveal">
+      <h2>园中八景</h2>
+      <p>从东园入口出发，一路向西。点开地图上的红点，看每一处的影像与故事。</p>
+    </div>
+
+    <div class="explore-map" id="exploreMap">
+      <div class="map-frame">
+        <svg class="garden-map" id="gardenMap" viewBox="0 0 1200 760" role="img" aria-label="拙政园手绘游览图"></svg>
+        <div class="pins" id="pins"></div>
+      </div>
+      <ol class="spot-list" id="spotList"></ol>
+    </div>
+
+    <article class="detail" id="detail" hidden>
+      <div class="detail-top">
+        <button class="link-btn" id="backBtn" type="button">← 返回地图</button>
+        <p class="crumbs" id="crumbs"></p>
+        <p class="detail-count" id="detailCount"></p>
+      </div>
+      <div class="detail-main">
+        <div class="detail-intro">
+          <p class="detail-area" id="dArea"></p>
+          <h3 id="dName"></h3>
+          <p class="detail-tagline" id="dTagline"></p>
+          <div class="detail-desc" id="dDesc"></div>
+          <blockquote class="detail-quote"><p id="dQuote"></p><cite id="dQuoteSrc"></cite></blockquote>
+          <div class="detail-tip"><h4>怎么看</h4><p id="dTip"></p></div>
+        </div>
+        <figure class="stage">
+          <div class="stage-img"><img id="dImg" alt=""></div>
+          <button class="stage-nav prev" id="prevPhoto" type="button" aria-label="上一张">‹</button>
+          <button class="stage-nav next" id="nextPhoto" type="button" aria-label="下一张">›</button>
+          <figcaption><span id="dCap"></span><span id="dPhotoCount"></span></figcaption>
+        </figure>
+      </div>
+      <div class="detail-bottom">
+        <div class="panel" id="thumbsPanel">
+          <h4>本处影像</h4>
+          <div class="thumbs" id="dThumbs"></div>
+        </div>
+        <div class="panel locator">
+          <h4>所在位置</h4>
+          <div class="mini" id="mini"><span class="mini-pin" id="miniPin"></span></div>
+        </div>
+        <button class="panel next-card" id="nextCard" type="button">
+          <span class="next-thumb" id="nextThumb"></span>
+          <span class="next-bd">
+            <span class="next-label" id="nextLabel">下一站</span>
+            <strong id="nextName"></strong>
+            <span class="next-tag" id="nextTag"></span>
+            <span class="next-go">前往 →</span>
+          </span>
+        </button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 4 结尾 -->
+<section id="owners" class="owners" data-cat="owners">
+  <div class="wrap">
+    <h2 class="reveal">园子真正的主人</h2>
+    <div class="board">
+      <figure class="reveal">
+        <svg viewBox="0 0 420 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="一橘一狸两只园猫坐在月洞门前">
+          <rect width="420" height="420" fill="#e6dcc2"/>
+          <rect y="40" width="420" height="300" fill="#f4efe2"/>
+          <path d="M-10 40 L430 40 L420 18 L0 18 Z" fill="#4f554f"/>
+          <rect y="38" width="420" height="6" fill="#2f332f"/>
+          <circle cx="210" cy="200" r="118" fill="#b9c9bd"/>
+          <clipPath id="gate"><circle cx="210" cy="200" r="118"/></clipPath>
+          <g clip-path="url(#gate)">
+            <rect x="90" y="230" width="240" height="100" fill="#9fb5aa"/>
+            <path d="M92 236 q10 -5 20 0 t20 0 M180 262 q10 -5 20 0 t20 0 M260 244 q10 -5 20 0 t20 0" fill="none" stroke="#7f998d" stroke-width="2"/>
+            <circle cx="120" cy="150" r="46" fill="#6f8a6c"/><circle cx="170" cy="120" r="40" fill="#86a07e"/>
+            <circle cx="290" cy="140" r="52" fill="#5f7a60"/><circle cx="240" cy="170" r="34" fill="#93a886"/>
+            <path d="M190 206 L230 206 L240 196 L180 196 Z" fill="#4f554f"/>
+            <rect x="192" y="206" width="4" height="22" fill="#6b3a2c"/><rect x="224" y="206" width="4" height="22" fill="#6b3a2c"/>
+          </g>
+          <circle cx="210" cy="200" r="118" fill="none" stroke="#cfc6ad" stroke-width="10"/>
+          <rect y="330" width="420" height="90" fill="#cfc4a6"/>
+          <path d="M0 336 H420 M0 370 H420 M0 404 H420 M60 336 V370 M170 336 V370 M280 336 V370 M390 336 V370 M115 370 V404 M225 370 V404 M335 370 V404" stroke="#b8ad8f" stroke-width="2"/>
+          <path class="petal" d="M0 0 q6 -6 12 0 q-6 6 -12 0Z" fill="#e7a7a0"/>
+          <ellipse cx="210" cy="372" rx="120" ry="10" fill="#000" opacity=".1"/>
+          <g transform="translate(160,370)">
+            <path class="cat-tail" d="M34 -6 Q74 -8 68 -52" fill="none" stroke="#e8964a" stroke-width="11" stroke-linecap="round"/>
+            <path d="M-38 0 Q-46 -72 0 -80 Q46 -72 38 0 Z" fill="#e8964a" stroke="#222" stroke-width="3"/>
+            <ellipse cx="0" cy="-30" rx="18" ry="26" fill="#f3c38f"/>
+            <circle cx="0" cy="-104" r="32" fill="#e8964a" stroke="#222" stroke-width="3"/>
+            <path d="M-26 -122 L-30 -150 L-6 -134Z M26 -122 L30 -150 L6 -134Z" fill="#e8964a" stroke="#222" stroke-width="3" stroke-linejoin="round"/>
+            <g class="cat-eyes"><circle cx="-11" cy="-106" r="3.2" fill="#222"/><circle cx="11" cy="-106" r="3.2" fill="#222"/></g>
+            <path d="M-4 -96 L0 -92 L4 -96" fill="none" stroke="#b3402a" stroke-width="2.4" stroke-linecap="round"/>
+            <ellipse cx="-14" cy="-2" rx="11" ry="6" fill="#f3c38f" stroke="#222" stroke-width="2"/>
+            <ellipse cx="14" cy="-2" rx="11" ry="6" fill="#f3c38f" stroke="#222" stroke-width="2"/>
+          </g>
+          <g transform="translate(262,372) scale(.92)">
+            <path class="cat-tail rev" d="M-34 -6 Q-76 -8 -70 -52" fill="none" stroke="#a39479" stroke-width="11" stroke-linecap="round"/>
+            <path d="M-38 0 Q-46 -72 0 -80 Q46 -72 38 0 Z" fill="#a39479" stroke="#222" stroke-width="3"/>
+            <path d="M-34 -30 q10 4 14 -6 M34 -30 q-10 4 -14 -6 M-36 -52 q10 4 12 -6 M36 -52 q-10 4 -12 -6" fill="none" stroke="#5b4e3d" stroke-width="4" stroke-linecap="round"/>
+            <ellipse cx="0" cy="-30" rx="16" ry="24" fill="#e7dcc6"/>
+            <circle cx="0" cy="-104" r="32" fill="#a39479" stroke="#222" stroke-width="3"/>
+            <path d="M-26 -122 L-30 -150 L-6 -134Z M26 -122 L30 -150 L6 -134Z" fill="#a39479" stroke="#222" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M-8 -134 L-6 -120 M0 -136 L0 -121 M8 -134 L6 -120" stroke="#5b4e3d" stroke-width="3.5" stroke-linecap="round"/>
+            <g class="cat-eyes late"><circle cx="-11" cy="-106" r="3.2" fill="#222"/><circle cx="11" cy="-106" r="3.2" fill="#222"/></g>
+            <path d="M-4 -96 L0 -92 L4 -96" fill="none" stroke="#b3402a" stroke-width="2.4" stroke-linecap="round"/>
+            <ellipse cx="-14" cy="-2" rx="11" ry="6" fill="#e7dcc6" stroke="#222" stroke-width="2"/>
+            <ellipse cx="14" cy="-2" rx="11" ry="6" fill="#e7dcc6" stroke="#222" stroke-width="2"/>
+          </g>
+        </svg>
+        <figcaption>合影：一橘一狸，每天在洞门口值班</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="狸花猫在廊下长凳上蜷着打盹">
+          <rect width="300" height="420" fill="#f4efe2"/>
+          <path d="M-10 0 H310 V60 H-10 Z" fill="#3b2a22"/>
+          <path d="M-10 60 H310" stroke="#6b3a2c" stroke-width="8"/>
+          <g fill="none" stroke="#6b4a3a" stroke-width="4">
+            <rect x="70" y="110" width="160" height="130"/>
+            <path d="M70 175 H230 M150 110 V240 M110 110 L150 150 L190 110 M110 240 L150 200 L190 240 M70 142 L110 175 L70 208 M230 142 L190 175 L230 208"/>
+          </g>
+          <rect x="74" y="114" width="152" height="122" fill="#b9c9bd" opacity=".35"/>
+          <rect x="18" y="60" width="18" height="360" fill="#7a3a2a"/>
+          <rect x="264" y="60" width="18" height="360" fill="#7a3a2a"/>
+          <rect y="330" width="300" height="90" fill="#8c6a52"/>
+          <path d="M0 350 H300 M0 380 H300" stroke="#76583f" stroke-width="3"/>
+          <rect x="36" y="290" width="228" height="16" fill="#a57b5c" stroke="#5a3d2c" stroke-width="2"/>
+          <rect x="52" y="306" width="12" height="30" fill="#5a3d2c"/><rect x="236" y="306" width="12" height="30" fill="#5a3d2c"/>
+          <ellipse cx="150" cy="290" rx="80" ry="6" fill="#000" opacity=".12"/>
+          <g class="breathe">
+            <ellipse cx="160" cy="258" rx="66" ry="34" fill="#a39479" stroke="#222" stroke-width="3"/>
+            <path d="M140 228 q8 10 0 22 M165 225 q8 12 0 26 M190 230 q8 10 0 22" fill="none" stroke="#5b4e3d" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <path d="M220 270 Q236 300 170 292 Q120 290 98 280" fill="none" stroke="#a39479" stroke-width="13" stroke-linecap="round"/>
+          <circle cx="106" cy="262" r="26" fill="#a39479" stroke="#222" stroke-width="3"/>
+          <path d="M86 246 L80 222 L100 238Z M114 240 L126 218 L128 244Z" fill="#a39479" stroke="#222" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M94 262 q5 4 10 0 M112 262 q5 4 10 0" fill="none" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M104 272 L108 275 L112 272" fill="none" stroke="#b3402a" stroke-width="2" stroke-linecap="round"/>
+          <text class="zz" x="120" y="210" font-size="22" fill="#6a6454">z</text>
+          <text class="zz late" x="136" y="196" font-size="16" fill="#6a6454">z</text>
+        </svg>
+        <figcaption>廊下打盹，谁来也不醒</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="橘猫在荷塘边的石头上肚皮朝天躺平">
+          <rect width="300" height="420" fill="#e9e3cf"/>
+          <rect y="170" width="300" height="250" fill="#b9c9bd"/>
+          <path d="M20 200 q10 -5 20 0 t20 0 M180 190 q10 -5 20 0 t20 0 M60 390 q10 -5 20 0 t20 0 M200 380 q10 -5 20 0 t20 0" fill="none" stroke="#8ea79b" stroke-width="2.2"/>
+          <path d="M0 80 Q60 40 120 70 Q180 30 240 60 Q280 50 300 70 V170 H0 Z" fill="#a4b08f"/>
+          <path d="M0 120 Q70 90 140 118 Q210 88 300 115 V170 H0 Z" fill="#7d9076"/>
+          <g class="bob"><ellipse cx="50" cy="210" rx="36" ry="12" fill="#7f9870" stroke="#5d7253" stroke-width="2"/><path d="M50 210 L30 204 M50 210 L72 205" stroke="#5d7253" stroke-width="1.6"/></g>
+          <g class="bob late"><ellipse cx="250" cy="228" rx="40" ry="13" fill="#8fa77f" stroke="#5d7253" stroke-width="2"/><path d="M250 228 L228 222 M250 228 L274 223" stroke="#5d7253" stroke-width="1.6"/></g>
+          <g class="bob"><path d="M232 180 q-6 -24 8 -34 q14 10 8 34 Z" fill="#e7a7a0" stroke="#b76b62" stroke-width="1.6"/><path d="M240 180 V214" stroke="#5d7253" stroke-width="2.4"/></g>
+          <path d="M20 360 Q30 300 110 290 Q210 280 270 310 Q296 340 280 370 Q200 392 90 388 Q30 386 20 360 Z" fill="#b9b6a8" stroke="#55534a" stroke-width="3"/>
+          <path d="M60 350 q30 -12 60 -4 M170 330 q30 -6 60 8" fill="none" stroke="#8f8c7e" stroke-width="3" stroke-linecap="round"/>
+          <path class="flick" d="M214 296 Q250 300 262 276" fill="none" stroke="#e8964a" stroke-width="11" stroke-linecap="round"/>
+          <ellipse cx="160" cy="296" rx="62" ry="28" fill="#e8964a" stroke="#222" stroke-width="3"/>
+          <ellipse cx="160" cy="288" rx="40" ry="14" fill="#f3c38f"/>
+          <g class="paw"><ellipse cx="136" cy="262" rx="8" ry="13" fill="#e8964a" stroke="#222" stroke-width="2.4"/></g>
+          <g class="paw late"><ellipse cx="176" cy="260" rx="8" ry="13" fill="#e8964a" stroke="#222" stroke-width="2.4"/></g>
+          <circle cx="84" cy="300" r="28" fill="#e8964a" stroke="#222" stroke-width="3"/>
+          <path d="M66 318 L58 344 L80 326Z M98 322 L108 346 L110 318Z" fill="#e8964a" stroke="#222" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M70 300 q5 -4 10 0 M88 300 q5 -4 10 0" fill="none" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M80 288 L84 284 L88 288" fill="none" stroke="#b3402a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <figcaption>躺平的园主，最懂“拙政”</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <p class="q reveal">拙政不是真的笨。<br>是一个聪明人发现，<b>跟官场斗太累了，不如来浇菜。</b></p>
+    <svg class="end-cat" viewBox="0 0 200 120" aria-hidden="true">
+      <path class="cat-tail" d="M140 78 Q176 70 172 40" fill="none" stroke="#e8964a" stroke-width="11" stroke-linecap="round"/>
+      <path d="M40 84 Q36 106 90 106 Q150 106 152 86 Q150 68 118 64 L64 62 Q42 64 40 84Z" fill="#e8964a" stroke="#1c1c1c" stroke-width="2.2"/>
+      <circle cx="52" cy="52" r="28" fill="#e8964a" stroke="#1c1c1c" stroke-width="2.2"/>
+      <path d="M32 34 L30 12 L50 24Z" fill="#e8964a" stroke="#1c1c1c" stroke-width="2.2"/>
+      <path d="M72 34 L76 12 L56 24Z" fill="#e8964a" stroke="#1c1c1c" stroke-width="2.2"/>
+      <path d="M42 52 q5 3 10 0 M62 52 q5 3 10 0" fill="none" stroke="#1c1c1c" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <a class="btn ghost" href="#top">回到园门</a>
+  </div>
+</section>
+</main>
+
+<!-- 常驻猫导游 -->
+<aside class="guide" id="guide" aria-label="猫导游">
+  <button class="guide-avatar" id="guideAvatar" type="button" aria-label="收起或展开猫导游的话" aria-expanded="true">
+    <svg viewBox="0 0 100 80"><use href="#catMini"/></svg>
+  </button>
+  <div class="guide-bubble" id="guideBubble">
+    <p id="guideText" aria-live="polite"></p>
+  </div>
+</aside>
+
+<script src="js/data.js"></script>
+<script src="js/map.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
