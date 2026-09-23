@@ -142,16 +142,22 @@ window.initTour = function () {
     <figure><img alt=""><figcaption></figcaption></figure>`;
   document.body.appendChild(box);
   const boxImg = box.querySelector('img'), boxCap = box.querySelector('figcaption');
+  // 大图打开时锁住滚动；只在打开期间挂上，常驻的非 passive wheel 监听会让每次滚轮都等主线程，滚起来一顿一顿
+  const lockWheel = e => e.preventDefault();
 
   function openBox() {
     if (shownStation < 0) return;
     const multi = SPOTS[shownStation].photos.length > 1;
     box.querySelectorAll('.box-nav').forEach(b => { b.hidden = !multi; });
     box.hidden = false;
+    addEventListener('wheel', lockWheel, { passive: false });
     setPhoto(photoIdx);
     box.querySelector('.box-close').focus();
   }
-  const closeBox = () => { box.hidden = true; };
+  const closeBox = () => {
+    box.hidden = true;
+    removeEventListener('wheel', lockWheel, { passive: false });
+  };
 
   panel.addEventListener('click', e => { if (e.target.closest('.tp-shot')) openBox(); });
   box.addEventListener('click', e => {
@@ -159,8 +165,6 @@ window.initTour = function () {
     else if (e.target.closest('.box-nav.next')) setPhoto(photoIdx + 1);
     else closeBox();
   });
-  // 打开时锁住滚动，否则背后的游园会跟着走
-  addEventListener('wheel', e => { if (!box.hidden) e.preventDefault(); }, { passive: false });
 
   /* ---------- 快捷条与小地图 ---------- */
   const dots = SPOTS.map((s, i) => {
@@ -190,23 +194,26 @@ window.initTour = function () {
   mini.appendChild(miniCat);
 
   /* ---------- 主循环 ---------- */
-  let dir = -1, facing = -1, lastMove = performance.now(), lastScrolled = -1, speed = 0, live = false;
+  let dir = -1, facing = -1, lastMove = performance.now(), shownScroll = -1, lastNow = 0, speed = 0, live = false;
 
   new IntersectionObserver(([e]) => { live = e.isIntersecting; }, { rootMargin: '100px' }).observe(tour);
 
   function frame(now) {
     requestAnimationFrame(frame);
-    if (!live) return;
+    if (!live) { shownScroll = -1; return; }
+    const dt = Math.min(.1, (now - lastNow) / 1000);
+    lastNow = now;
 
     const vw = stage.clientWidth, vh = stage.clientHeight;
     const scrolled = Math.max(0, Math.min(TOTAL * vh, -tour.getBoundingClientRect().top));
-    const u = scrolled / vh;
+    // 鼠标滚轮一格就跳约 100px：画面用一个平滑追赶真实滚动的进度，滑过去而不是瞬移
+    const prev = shownScroll < 0 ? scrolled : shownScroll;
+    shownScroll = reduced ? scrolled : prev + (scrolled - prev) * (1 - Math.exp(-dt / .12));
+    const u = shownScroll / vh;
 
-    if (lastScrolled < 0) lastScrolled = scrolled;
-    const delta = Math.abs(scrolled - lastScrolled);
+    const delta = Math.abs(shownScroll - prev);
     if (delta > .6) lastMove = now;
     speed = lerp(speed, Math.min(1, delta / 26), .2);
-    lastScrolled = scrolled;
     const idle = (now - lastMove) / 1000;
 
     let seg = plan[0];
