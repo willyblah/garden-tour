@@ -41,10 +41,50 @@ window.createCat = function () {
     }
   };
 
+  // 耳朵：长在圆脑袋 (cx,cy,r) 的 deg 方向上。两侧从头部轮廓沿切线长出，耳根不留缺口，耳尖磨圆
+  const ear = (parent, [cx, cy], r, deg, len, inner = true) => {
+    const a = deg * Math.PI / 180, sp = .42;
+    const at = (ang, rad) => [cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad];
+    const T = at(a, r + len);
+    const side = sgn => {
+      const b = a + sgn * sp, J = at(b, r);
+      const C = [J[0] + Math.sin(b) * sgn * 3 + Math.cos(b) * 2.2, J[1] - Math.cos(b) * sgn * 3 + Math.sin(b) * 2.2];
+      const d = Math.hypot(C[0] - T[0], C[1] - T[1]);
+      return { I: at(b, r * .6), J, C, A: [T[0] + (C[0] - T[0]) * 2.6 / d, T[1] + (C[1] - T[1]) * 2.6 / d] };
+    };
+    const L = side(-1), R = side(1);
+    const path = pts => {
+      const f = v => pts(v).map(n => n.toFixed(1)).join(',');
+      return `M${f(L.I)} L${f(L.J)} Q${f(L.C)} ${f(L.A)} Q${f(T)} ${f(R.A)} Q${f(R.C)} ${f(R.J)} L${f(R.I)} Z`;
+    };
+    el('path', { d: path(v => v), fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, parent);
+    if (!inner) return;
+    const O = at(a, r + len * .3);
+    el('path', { d: path(v => [O[0] + (v[0] - O[0]) * .55, O[1] + (v[1] - O[1]) * .55]), fill: C.ear }, parent);
+  };
+
   /* ---------------- 姿势一：走 ---------------- */
   const walk = el('g', { class: 'pose' }, body);
+  el('ellipse', { cx: 2, cy: 23, rx: 27, ry: 5, fill: '#2f2c22', opacity: .13 }, walk);
 
-  const tail = el('g', {}, walk);
+  // 腿：髋/肩 → 膝 → 爪 两段，由 update 按步态求解；全部画在身体之下，只露出下半截
+  // 远侧两条颜色深一点，近侧落点更靠下，形成 3/4 俯视的前后层次
+  const LEGS = [
+    { hx: -15, hy: 5, gy: 23, front: false, ph: 0, near: true },
+    { hx: 12, hy: 5, gy: 23, front: true, ph: .25, near: true },
+    { hx: -10, hy: 3, gy: 20.5, front: false, ph: .5, near: false },
+    { hx: 17, hy: 3, gy: 20.5, front: true, ph: .75, near: false }
+  ];
+  const legLayer = el('g', {}, walk);
+  [2, 3, 0, 1].forEach(i => {
+    const L = LEGS[i], g = el('g', {}, legLayer), col = L.near ? C.fur : C.back;
+    L.edge = el('path', { fill: 'none', stroke: C.line, 'stroke-width': 6.4 + LW * 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+    L.fill = el('path', { fill: 'none', stroke: col, 'stroke-width': 6.4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+    L.paw = el('ellipse', { rx: 4, ry: 2.6, fill: L.near ? C.light : col, stroke: C.line, 'stroke-width': 1.3 }, g);
+  });
+
+  const upper = el('g', {}, walk);   // 随步伐起伏的上半身
+  const tail = el('g', {}, upper);
   const tailFuzz = el('g', {}, tail);
   const tailPath = el('path', {
     d: 'M-24,-2 Q-46,-10 -48,-32', fill: 'none',
@@ -59,33 +99,22 @@ window.createCat = function () {
     stroke: C.light, 'stroke-width': 7.5, 'stroke-linecap': 'round'
   }, tail);
 
-  const legsBack = el('g', {}, walk);
-  const leg = (parent, cx, cy) => el('ellipse', {
-    cx, cy, rx: 4.8, ry: 6.2, fill: C.back, stroke: C.line, 'stroke-width': LW
-  }, parent);
-  const lb1 = leg(legsBack, -17, 15), lb2 = leg(legsBack, -7, 17);
-
   // 身体轮廓的绒毛：画在身体之下，只在边缘露出一圈
-  const fringe = el('g', {}, walk);
+  const fringe = el('g', {}, upper);
   fuzz(fringe, [[-25, -4], [-14, -20], [2, -21], [17, -17], [24, -3], [20, 10], [4, 17], [-12, 16], [-24, 5], [-25, -4]], 3.8, C.fuzz);
 
   const BODY = 'M-25,-4 C-28,-16 -16,-22 -2,-21 C13,-20 23,-14 24,-3 C25,9 14,17 -1,17 C-16,17 -22,8 -25,-4 Z';
-  el('path', { d: BODY, fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, walk);
-  el('ellipse', { cx: -2, cy: -11, rx: 19, ry: 8, fill: C.back, opacity: .5 }, walk);
-  el('ellipse', { cx: 0, cy: 9, rx: 14, ry: 6, fill: C.light, opacity: .7 }, walk);
+  el('path', { d: BODY, fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, upper);
+  el('ellipse', { cx: -2, cy: -11, rx: 19, ry: 8, fill: C.back, opacity: .5 }, upper);
+  el('ellipse', { cx: 0, cy: 9, rx: 14, ry: 6, fill: C.light, opacity: .7 }, upper);
   [-16, -8, 0, 8].forEach(x =>
-    el('path', { d: `M${x},-19 q3,6 0,12`, fill: 'none', stroke: C.stripe, 'stroke-width': 3.2, 'stroke-linecap': 'round', opacity: .8 }, walk));
+    el('path', { d: `M${x},-19 q3,6 0,12`, fill: 'none', stroke: C.stripe, 'stroke-width': 3.2, 'stroke-linecap': 'round', opacity: .8 }, upper));
 
-  const legsFront = el('g', {}, walk);
-  const lf1 = leg(legsFront, 7, 17), lf2 = leg(legsFront, 15, 15);
-
-  const head = el('g', {}, walk);
+  const head = el('g', {}, upper);
   const headFringe = el('g', {}, head);
   fuzz(headFringe, [[14, -8], [17, -17], [26, -20], [35, -16], [39, -6], [35, 3], [26, 7], [17, 3], [14, -8]], 3.4, C.fuzz);
-  el('path', { d: 'M13,-14 L9,-29 L24,-21 Z', fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, head);
-  el('path', { d: 'M14.5,-16 L12,-25 L21.5,-20 Z', fill: C.ear }, head);
-  el('path', { d: 'M32,-18 L39,-30 L40,-15 Z', fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, head);
-  el('path', { d: 'M33.5,-19 L37.5,-26 L38,-17 Z', fill: C.ear }, head);
+  ear(head, [26, -6], 13, -126, 8.5);
+  ear(head, [26, -6], 13, -60, 8.5);
   el('circle', { cx: 26, cy: -6, r: 13, fill: C.fur, stroke: C.line, 'stroke-width': LW }, head);
   el('path', { d: 'M20,-17 q3,5 0,9 M26,-19 q3,5 0,9 M32,-17 q3,5 0,9', fill: 'none', stroke: C.stripe, 'stroke-width': 2.4, 'stroke-linecap': 'round', opacity: .75 }, head);
   el('ellipse', { cx: 27, cy: 0, rx: 8, ry: 5.4, fill: C.light }, head);
@@ -112,10 +141,8 @@ window.createCat = function () {
 
   const sitHead = el('g', {}, sit);
   fuzz(sitHead, [[-8, -12], [-6, -21], [4, -24], [14, -22], [20, -13], [19, -1], [8, 5], [-3, 1], [-8, -12]], 3.4, C.fuzz);
-  el('path', { d: 'M-9,-18 L-14,-36 L3,-27 Z', fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, sitHead);
-  el('path', { d: 'M-7.5,-20 L-10.5,-31 L0,-25.5 Z', fill: C.ear }, sitHead);
-  el('path', { d: 'M15,-21 L23,-36 L25,-19 Z', fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, sitHead);
-  el('path', { d: 'M16.5,-22 L21.5,-31 L22.5,-21 Z', fill: C.ear }, sitHead);
+  ear(sitHead, [6, -9], 14.5, -125, 9);
+  ear(sitHead, [6, -9], 14.5, -55, 9);
   el('circle', { cx: 6, cy: -9, r: 14.5, fill: C.fur, stroke: C.line, 'stroke-width': LW }, sitHead);
   el('path', { d: 'M0,-21 q3,5 0,9 M6,-23 q3,5 0,9 M12,-21 q3,5 0,9', fill: 'none', stroke: C.stripe, 'stroke-width': 2.5, 'stroke-linecap': 'round', opacity: .75 }, sitHead);
   el('ellipse', { cx: 6, cy: -3, rx: 9, ry: 6, fill: C.light }, sitHead);
@@ -137,8 +164,8 @@ window.createCat = function () {
   el('path', { d: 'M-14,-20 C-18,-8 -18,2 -14,12 M-2,-23 C-6,-10 -6,2 -2,15 M10,-22 C7,-10 7,2 10,14', fill: 'none', stroke: C.stripe, 'stroke-width': 3.2, 'stroke-linecap': 'round', opacity: .7 }, curl);
   const sleepHead = el('g', {}, sleep);
   fuzz(sleepHead, [[-28, -2], [-25, -10], [-16, -12], [-6, -9], [-3, 2], [-7, 12], [-16, 15], [-26, 10], [-28, -2]], 3.2, C.fuzz);
-  el('path', { d: 'M-24,-6 L-32,-20 L-14,-17 Z', fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, sleepHead);
-  el('path', { d: 'M-8,-14 L-4,-27 L2,-12 Z', fill: C.fur, stroke: C.line, 'stroke-width': LW, 'stroke-linejoin': 'round' }, sleepHead);
+  ear(sleepHead, [-16, 2], 13, -135, 7.5, false);
+  ear(sleepHead, [-16, 2], 13, -55, 7.5, false);
   el('circle', { cx: -16, cy: 2, r: 13, fill: C.fur, stroke: C.line, 'stroke-width': LW }, sleepHead);
   el('ellipse', { cx: -14, cy: 7, rx: 8, ry: 5, fill: C.light }, sleepHead);
   el('path', { d: 'M-24,1 q3,3 6,0 M-10,1 q3,3 6,0', fill: 'none', stroke: C.line, 'stroke-width': 1.6, 'stroke-linecap': 'round' }, sleepHead);
@@ -152,7 +179,35 @@ window.createCat = function () {
 
   /* ---------------- 驱动 ---------------- */
   const poses = { walk, sit, sleep };
-  let pose = 'walk', blinkUntil = 0;
+  let pose = 'walk', gait = 0, lastT = null;
+
+  // 一个步态周期里：前 60% 爪子着地、相对身体向后蹬；后 40% 抬起向前摆
+  const DUTY = .6, THIGH = 9, SHIN = 10;
+  function placeLeg(L, cyc, stride, lift, bob) {
+    const u = ((cyc + L.ph) % 1 + 1) % 1;
+    let fx, fy;
+    if (u < DUTY) {
+      fx = stride * (1 - 2 * u / DUTY);
+      fy = 0;
+    } else {
+      const v = (u - DUTY) / (1 - DUTY), e = v * v * (3 - 2 * v);
+      fx = stride * (2 * e - 1);
+      fy = -lift * Math.sin(Math.PI * v);
+    }
+    fx += L.hx + (L.front ? 1.5 : -1);
+    fy += L.gy;
+    const hx = L.hx, hy = L.hy + bob;
+    // 两段腿求膝盖：前腿腕关节朝前折，后腿跗关节朝后折
+    const dx = fx - hx, dy = fy - hy, d = Math.min(Math.hypot(dx, dy), THIGH + SHIN - .01);
+    const a = Math.acos((THIGH * THIGH + d * d - SHIN * SHIN) / (2 * THIGH * d));
+    const base = Math.atan2(dy, dx) + (L.front ? -a : a);
+    const kx = hx + Math.cos(base) * THIGH, ky = hy + Math.sin(base) * THIGH;
+    const dPath = `M${hx.toFixed(1)},${hy.toFixed(1)} L${kx.toFixed(1)},${ky.toFixed(1)} L${fx.toFixed(1)},${(fy - 1).toFixed(1)}`;
+    L.edge.setAttribute('d', dPath);
+    L.fill.setAttribute('d', dPath);
+    L.paw.setAttribute('cx', (fx + (L.front ? 1 : .6)).toFixed(1));
+    L.paw.setAttribute('cy', fy.toFixed(1));
+  }
 
   function setPose(name) {
     if (name === pose) return;
@@ -167,14 +222,18 @@ window.createCat = function () {
     root.setAttribute('transform', `translate(${x.toFixed(2)},${y.toFixed(2)}) scale(${SCALE})`);
     body.setAttribute('transform', `scale(${dir},1)`);
 
+    const dt = lastT == null ? 0 : Math.min(.1, Math.max(0, t - lastT));
+    lastT = t;
+
     if (pose === 'walk') {
-      const w = t * (5 + speed * 9);
+      // 相位按时间累积，速度变化时步子不会跳
+      gait = (gait + dt * (.8 + speed * 1.4)) % 1;
       const s = Math.min(1, .35 + speed);
-      lb1.setAttribute('cy', 15 + Math.sin(w) * 3.4 * s);
-      lb2.setAttribute('cy', 17 + Math.sin(w + 2.4) * 3.4 * s);
-      lf1.setAttribute('cy', 17 + Math.sin(w + 3.14) * 3.4 * s);
-      lf2.setAttribute('cy', 15 + Math.sin(w + 5.5) * 3.4 * s);
-      walk.setAttribute('transform', `translate(0,${(Math.sin(w * 2) * .9 * s).toFixed(2)})`);
+      // 每个周期四次落爪，身体随之轻微起伏
+      const bob = Math.cos(gait * Math.PI * 4) * .7 * s;
+      LEGS.forEach(L => placeLeg(L, gait, 7 * s, 3.6 + 2 * s, bob));
+      upper.setAttribute('transform', `translate(0,${bob.toFixed(2)})`);
+      head.setAttribute('transform', `translate(0,${(Math.cos(gait * Math.PI * 4 - .8) * .5 * s).toFixed(2)})`);
       const sw = Math.sin(t * 2.4) * (8 + speed * 10);
       tail.setAttribute('transform', `rotate(${sw.toFixed(1)},-24,-2)`);
       tailPath.setAttribute('d', `M-24,-2 Q${(-46 + sw * .3).toFixed(1)},-10 ${(-48 + sw * .5).toFixed(1)},-32`);
