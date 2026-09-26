@@ -55,6 +55,9 @@ h2 {
 .btn:hover { background: #9a3522; transform: translateY(-2px); }
 .btn.ghost { background: transparent; border: 1px solid rgba(246, 242, 231, .5); color: var(--paper); }
 .btn.ghost:hover { background: rgba(246, 242, 231, .1); }
+.btn-shop { background: var(--orange); color: var(--ink); font-weight: 600; box-shadow: 0 6px 20px rgba(232, 150, 74, .35); }
+.btn-shop:hover { background: #f0a560; }
+.bag { width: 1.15em; height: 1.15em; flex: none; }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
 .reveal.in { opacity: 1; transform: none; }
@@ -89,6 +92,7 @@ h2 {
   opacity: .92;
 }
 .topbar.solid .brand span { color: var(--red); border-color: var(--red); opacity: 1; }
+.topbar-right { display: flex; align-items: center; gap: 1.8rem; }
 .topbar-links { display: flex; gap: 1.6rem; }
 .topbar-links a {
   text-decoration: none;
@@ -99,6 +103,21 @@ h2 {
   opacity: .85;
 }
 .topbar-links a:hover, .topbar-links a.active { opacity: 1; border-color: var(--red); }
+.nav-shop {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .3rem 1rem;
+  border-radius: 50px;
+  background: var(--orange);
+  color: var(--ink);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-decoration: none;
+  transition: background .2s;
+}
+.nav-shop:hover { background: #f0a560; }
 @media (max-width: 860px) { .topbar-links { display: none; } }
 
 /* 开屏 */
@@ -120,6 +139,7 @@ h2 {
   letter-spacing: .06em;
 }
 .hero-lead { margin-top: 1.4rem; color: #c8c2b0; max-width: 30em; font-size: 1.05rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 .hero-say {
   position: relative;
   margin: 2rem 0 2.2rem;
@@ -570,6 +590,7 @@ h2 {
 .end .q { font-size: clamp(1.3rem, 2.8vw, 2rem); line-height: 2; max-width: 22em; margin: 0 auto; }
 .end .q b { color: #d9674f; font-weight: 400; }
 .end-cat { display: block; width: 150px; margin: 2.8rem auto 2.4rem; }
+.end-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 .credits {
   margin-top: 3.2rem;
   font-size: 1rem;

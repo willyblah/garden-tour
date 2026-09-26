@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>园猫小铺 · 拙政园猫导游</title>
+<meta name="description" content="拙政园猫导游的周边小铺。">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/shop.css">
+</head>
+<body class="shop-page">
+
+<nav class="topbar solid" aria-label="导航">
+  <a class="brand" href="index.html">拙政园<span>猫导游</span></a>
+  <div class="shop-account" id="account">
+    <button class="link-btn" id="loginBtn" type="button">登录 / 注册</button>
+    <div class="who" id="who" hidden>
+      <span class="who-email" id="whoEmail"></span>
+      <button class="link-btn" id="logoutBtn" type="button">退出</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <header class="shop-head">
+    <div class="wrap">
+      <h1>园猫小铺</h1>
+      <p>逛完园子，带一点回家。</p>
+    </div>
+  </header>
+
+  <section class="shop-list">
+    <div class="wrap wide">
+      <p class="shop-status" id="shopStatus">正在把货搬上架……</p>
+      <div class="goods" id="goods"></div>
+    </div>
+  </section>
+</main>
+
+<!-- 商品详情 -->
+<dialog class="modal item-modal" id="itemModal">
+  <button class="modal-close" type="button" data-close aria-label="关闭">×</button>
+  <div class="item-body">
+    <img id="itemImg" alt="">
+    <div class="item-info">
+      <h2 id="itemName"></h2>
+      <p class="item-price" id="itemPrice"></p>
+      <p class="item-desc" id="itemDesc"></p>
+      <button class="btn" id="orderBtn" type="button">立即下单</button>
+      <p class="item-msg" id="orderMsg" role="alert"></p>
+    </div>
+  </div>
+</dialog>
+
+<!-- 登录 / 注册 -->
+<dialog class="modal auth-modal" id="authModal">
+  <button class="modal-close" type="button" data-close aria-label="关闭">×</button>
+  <div class="auth-body">
+    <div class="auth-tabs" role="tablist">
+      <button type="button" role="tab" data-mode="login" aria-selected="true">登录</button>
+      <button type="button" role="tab" data-mode="signup" aria-selected="false">注册</button>
+    </div>
+    <p class="auth-tip" id="authTip">下单前请先登录。</p>
+    <form id="authForm">
+      <label>邮箱<input type="email" name="email" autocomplete="email" required></label>
+      <label>密码<input type="password" name="password" autocomplete="current-password" minlength="6" required></label>
+      <button class="btn" type="submit" id="authSubmit">登录</button>
+      <p class="auth-msg" id="authMsg" role="alert"></p>
+    </form>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>
