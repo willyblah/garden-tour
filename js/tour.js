@@ -96,6 +96,8 @@ window.initTour = function () {
     shownStation = i;
     photoIdx = 0;
     const s = SPOTS[i];
+    // 趁游客读这一站，先把下一站首图拉下来
+    if (SPOTS[i + 1]) new Image().src = `img/lg/${SPOTS[i + 1].photos[0].file}`;
     panel.innerHTML = `
       <p class="tp-meta"><span class="tp-num">${String(i + 1).padStart(2, '0')}</span><span class="tp-area">${s.area}</span></p>
       <h3 class="tp-name">${s.name}</h3>

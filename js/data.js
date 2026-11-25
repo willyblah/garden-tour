@@ -15,9 +15,9 @@ window.SPOTS = [
     tip: '别急着往里走，先隔着花窗往园里看一眼，东园的大草坪和树影已经在窗格里了。',
     quote: { text: '独立天地间，清风洒兰雪。', src: '李白《别鲁颂》' },
     photos: [
-      { file: 'main-entrance-1.jpg', cap: '拙政园园门' },
-      { file: 'main-entrance-2.jpg', cap: '“入胜”洞门，入园之始' },
-      { file: 'lanxuetang-1.jpg', cap: '花窗里的东园' }
+      { file: 'main-entrance-1.webp', cap: '拙政园园门' },
+      { file: 'main-entrance-2.webp', cap: '“入胜”洞门，入园之始' },
+      { file: 'lanxuetang-1.webp', cap: '花窗里的东园' }
     ],
     cat: '进门先别急着往里冲。第一站兰雪堂——你看那扇花窗，东园已经在里面等你了喵。'
   },
@@ -35,8 +35,8 @@ window.SPOTS = [
     tip: '站远一点看轮廓，再走近看石上的孔洞，光线从洞里穿过去，石头就轻了。',
     quote: { text: '虽由人作，宛自天开。', src: '计成《园冶》' },
     photos: [
-      { file: 'zhuiyun-peak-1.jpg', cap: '树影里的太湖石峰' },
-      { file: 'entrance-rockery-1.jpg', cap: '粉墙前的松石小景' }
+      { file: 'zhuiyun-peak-1.webp', cap: '树影里的太湖石峰' },
+      { file: 'entrance-rockery-1.webp', cap: '粉墙前的松石小景' }
     ],
     cat: '缀云峰。本喵小时候想爬上去，没爬上去——石头上全是洞，爪子不好使喵。'
   },
@@ -54,9 +54,9 @@ window.SPOTS = [
     tip: '在“晚翠”月洞门里站定，往外看，再往后退两步，看画框怎么变。',
     quote: { text: '东园载酒西园醉，摘尽枇杷一树金。', src: '戴复古' },
     photos: [
-      { file: 'linglong-guan-1.jpg', cap: '云墙与“晚翠”月洞门' },
-      { file: 'pipa-yuan-1.jpg', cap: '窗框里的小院' },
-      { file: 'haitang-chunwu-1.jpg', cap: '花窗借景' }
+      { file: 'linglong-guan-1.webp', cap: '云墙与“晚翠”月洞门' },
+      { file: 'pipa-yuan-1.webp', cap: '窗框里的小院' },
+      { file: 'haitang-chunwu-1.webp', cap: '花窗借景' }
     ],
     cat: '这里每一个门、每一扇窗都是画框。你随便站一个位置，都是造园人替你挑好的喵。'
   },
@@ -74,8 +74,8 @@ window.SPOTS = [
     tip: '最好挑个下雨天来，坐在轩里，隔着长窗听芭蕉。',
     quote: { text: '蕉叶半黄荷叶碧，两家秋雨一家声。', src: '杨万里《秋雨叹》' },
     photos: [
-      { file: 'tingyu-xuan-1.jpg', cap: '芭蕉、小池与粉墙' },
-      { file: 'tingyu-xuan-2.jpg', cap: '轩内隔窗望芭蕉' }
+      { file: 'tingyu-xuan-1.webp', cap: '芭蕉、小池与粉墙' },
+      { file: 'tingyu-xuan-2.webp', cap: '轩内隔窗望芭蕉' }
     ],
     cat: '本喵最讨厌下雨，但下雨天会来这里。芭蕉叶响起来，就不觉得冷了喵。'
   },
@@ -93,7 +93,7 @@ window.SPOTS = [
     tip: '六七月来，坐在北侧长窗边，看荷，也闻荷。',
     quote: { text: '香远益清，亭亭净植。', src: '周敦颐《爱莲说》' },
     photos: [
-      { file: 'yuanxiangtang-1.jpg', cap: '临水轩榭与一池夏荷' }
+      { file: 'yuanxiangtang-1.webp', cap: '临水轩榭与一池夏荷' }
     ],
     cat: '到全园正中心了。夏天这里整座堂都是荷花味，本喵每次路过都要多吸两口喵。'
   },
@@ -111,9 +111,9 @@ window.SPOTS = [
     tip: '从远香堂一侧远看亭子，再走进亭里回看远香堂——同一片水，两种看法。',
     quote: { text: '四壁荷花三面柳，半潭秋水一房山。', src: '亭中楹联' },
     photos: [
-      { file: 'hefeng-simian-ting-1.jpg', cap: '荷叶田田，亭隐林间' },
-      { file: 'xuexiang-yunwei-ting-1.jpg', cap: '山岛上的亭子与树影' },
-      { file: 'jianshanlou-1.jpg', cap: '厅内长窗与灯' }
+      { file: 'hefeng-simian-ting-1.webp', cap: '荷叶田田，亭隐林间' },
+      { file: 'xuexiang-yunwei-ting-1.webp', cap: '山岛上的亭子与树影' },
+      { file: 'jianshanlou-1.webp', cap: '厅内长窗与灯' }
     ],
     cat: '四面都是水，风从哪边来都行。本喵在这里睡午觉，从来没热醒过喵。'
   },
@@ -131,10 +131,10 @@ window.SPOTS = [
     tip: '在船头的平台上站一会儿，往北看，整个中园的水面在你面前展开。',
     quote: { text: '采芳洲兮杜若，将以遗兮下女。', src: '屈原《九歌·湘君》' },
     photos: [
-      { file: 'xiangzhou-1.jpg', cap: '曲桥、柳岸与荷' },
-      { file: 'xiaocanglang-1.jpg', cap: '粉墙前的临水轩廊' },
-      { file: 'yulantang-1.jpg', cap: '厅堂陈设' },
-      { file: 'yulantang-2.jpg', cap: '花窗与红木椅' }
+      { file: 'xiangzhou-1.webp', cap: '曲桥、柳岸与荷' },
+      { file: 'xiaocanglang-1.webp', cap: '粉墙前的临水轩廊' },
+      { file: 'yulantang-1.webp', cap: '厅堂陈设' },
+      { file: 'yulantang-2.webp', cap: '花窗与红木椅' }
     ],
     cat: '这艘船本喵上去过一百次，它一次都没开。挺好的，不晕船喵。'
   },
@@ -152,8 +152,8 @@ window.SPOTS = [
     tip: '抬头看屋顶的弧线，再往北望——水那头是留听阁，转角处是扇形的与谁同坐轩。',
     quote: { text: '秋阴不散霜飞晚，留得枯荷听雨声。', src: '李商隐《宿骆氏亭寄怀崔雍崔衮》' },
     photos: [
-      { file: 'saliu-yuanyang-guan-1.jpg', cap: '馆内陈设与匾额' },
-      { file: 'liuting-ge-1.jpg', cap: '漏窗外的屋瓦与垂柳' }
+      { file: 'saliu-yuanyang-guan-1.webp', cap: '馆内陈设与匾额' },
+      { file: 'liuting-ge-1.webp', cap: '漏窗外的屋瓦与垂柳' }
     ],
     cat: '最后一站。以前这里天天唱昆曲，本喵的祖上听得多了，叫起来都有腔调喵。'
   }
