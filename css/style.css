@@ -597,6 +597,7 @@ h2 {
   letter-spacing: .24em;
   color: rgba(246, 242, 231, .88);
 }
+.credits.advisor { margin-top: .8rem; }
 
 body.in-tour .guide { opacity: 0; pointer-events: none; }
 
