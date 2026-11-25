@@ -200,6 +200,7 @@ window.initTour = function () {
 
   new IntersectionObserver(([e]) => { live = e.isIntersecting; }, { rootMargin: '100px' }).observe(tour);
 
+  let lastHint = '';
   function frame(now) {
     requestAnimationFrame(frame);
     if (!live) { shownScroll = -1; return; }
@@ -294,7 +295,8 @@ window.initTour = function () {
 
     title.style.opacity = seg.type === 'in' ? (1 - band(p, .1, .55)) : 0;
     hint.style.opacity = u < .35 ? 1 : seg.type === 'out' ? band(p, .3, .7) : 0;
-    hint.textContent = seg.type === 'out' ? '再往下，去见园子真正的主人' : '继续下滚，跟着它走';
+    const hintText = seg.type === 'out' ? '再往下，去见园子真正的主人' : '继续下滚，跟着它走';
+    if (hintText !== lastHint) hint.textContent = lastHint = hintText;
 
     miniCat.style.left = cx / W * 100 + '%';
     miniCat.style.top = cy / H * 100 + '%';

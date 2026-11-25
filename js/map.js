@@ -34,10 +34,6 @@ window.buildGardenMap = function (svg) {
       <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3"/>
       <feDisplacementMap in="SourceGraphic" scale="4"/>
     </filter>
-    <filter id="m-grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="8"/>
-      <feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.09 0"/>
-    </filter>
     <radialGradient id="m-hill">
       <stop offset="0" stop-color="#c9c09f" stop-opacity=".75"/>
       <stop offset="1" stop-color="#c9c09f" stop-opacity="0"/>
@@ -247,5 +243,4 @@ window.buildGardenMap = function (svg) {
   const n = el('text', { x: 0, y: -32, 'font-size': 20, fill: '#3f3d36', 'text-anchor': 'middle' }, comp);
   n.textContent = '北';
 
-  el('rect', { width: 1200, height: 760, filter: 'url(#m-grain)', 'pointer-events': 'none' }, svg);
 };
